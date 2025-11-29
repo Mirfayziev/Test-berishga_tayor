@@ -35,6 +35,9 @@
             <a href="{{ url_for('activity_page') }}" class="nav-item {% if request.endpoint == 'activity_page' %}active{% endif %}">
                 <span>🔥</span> <span>Xodim activity</span>
             </a>
+            <a href="{{ url_for('ai500_landing') }}" class="nav-item {% if request.endpoint == 'ai500_landing' %}active{% endif %}">
+                <span>🚀</span> <span>AI500 pitch</span>
+            </a>
         </nav>
         <div class="sidebar-footer">
             {% if current_user.is_authenticated %}
