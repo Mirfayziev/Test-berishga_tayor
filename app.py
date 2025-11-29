@@ -181,6 +181,11 @@ def ai_solar_forecast():
 # =====================================
 # Routes
 # =====================================
+@app.route("/ai500")
+def ai500_landing():
+    return render_template("ai500.html")
+
+# Routes
 
 @app.route("/")
 @login_required
