@@ -628,4 +628,53 @@ select {
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
 }
+.ai500-list {
+  padding-left: 18px;
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.ai500-list li {
+  margin-bottom: 4px;
+}
+
+.ai500-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.ai500-roadmap {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+}
+
+.ai500-step {
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,0.4);
+  padding: 10px;
+  background: radial-gradient(circle at top left, rgba(79,70,229,0.14), rgba(15,23,42,1));
+  font-size: 12px;
+}
+
+.ai500-step-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.ai500-links {
+  padding-left: 18px;
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.ai500-links li {
+  margin-bottom: 3px;
+}
+
+@media (max-width: 1024px) {
+  .ai500-roadmap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
