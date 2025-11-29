@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block title %}Topshiriqlar · AF Imperiya{% endblock %}
+{% block header_title %}Topshiriqlar boshqaruvi{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header card-header-flex">
+        <div>
+            <h3>Topshiriqlar ro'yxati</h3>
+            <p class="card-subtitle">Yaratish, boshqarish va AI orqali tahlil qilish</p>
+        </div>
+        <div class="card-header-actions">
+            <form method="get" class="form-inline">
+                <select name="status" onchange="this.form.submit()">
+                    <option value="">Barcha holat</option>
+                    <option value="new" {% if status == 'new' %}selected{% endif %}>Yangi</option>
+                    <option value="in_progress" {% if status == 'in_progress' %}selected{% endif %}>Jarayonda</option>
+                    <option value="review" {% if status == 'review' %}selected{% endif %}>Ko'rib chiqishda</option>
+                    <option value="done" {% if status == 'done' %}selected{% endif %}>Bajarilgan</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div class="grid-2 mt-2">
+        <div>
+            <div class="table-simple">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sarlavha</th>
+                            <th>Holat</th>
+                            <th>Ustuvorlik</th>
+                            <th>Kimga biriktirilgan</th>
+                            <th>Muddat</th>
+                            <th>Holatni o'zgartirish</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in tasks %}
+                        <tr>
+                            <td>{{ t.title }}</td>
+                            <td><span class="badge status-{{ t.status }}">{{ t.status }}</span></td>
+                            <td><span class="badge priority-{{ t.priority }}">{{ t.priority }}</span></td>
+                            <td>{{ t.assignee.full_name if t.assignee else "-" }}</td>
+                            <td>{{ t.due_date or "-" }}</td>
+                            <td>
+                                <form method="post" action="{{ url_for('tasks_update_status', task_id=t.id) }}">
+                                    <select name="status" onchange="this.form.submit()">
+                                        <option value="new" {% if t.status == 'new' %}selected{% endif %}>new</option>
+                                        <option value="in_progress" {% if t.status == 'in_progress' %}selected{% endif %}>in_progress</option>
+                                        <option value="review" {% if t.status == 'review' %}selected{% endif %}>review</option>
+                                        <option value="done" {% if t.status == 'done' %}selected{% endif %}>done</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6">Topshiriqlar hali mavjud emas.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <div class="card card-inner">
+                <h3>Yangi topshiriq yaratish</h3>
+                <form method="post" action="{{ url_for('tasks_create') }}" class="form">
+                    <label>
+                        <span>Sarlavha</span>
+                        <input type="text" name="title" required>
+                    </label>
+                    <label>
+                        <span>Tavsif</span>
+                        <textarea name="description" rows="3"></textarea>
+                    </label>
+                    <label>
+                        <span>Ustuvorlik</span>
+                        <select name="priority">
+                            <option value="low">Past</option>
+                            <option value="normal" selected>O‘rta</option>
+                            <option value="high">Yuqori</option>
+                            <option value="critical">Kritik</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>Kimga biriktirish</span>
+                        <select name="assigned_to_id">
+                            <option value="">Hozircha yo‘q</option>
+                            {% for u in users %}
+                                <option value="{{ u.id }}">{{ u.full_name }} ({{ u.role }})</option>
+                            {% endfor %}
+                        </select>
+                    </label>
+                    <label>
+                        <span>Muddat</span>
+                        <input type="date" name="due_date">
+                    </label>
+
+                    <div class="ai-hint-box">
+                        <div class="ai-hint-header">
+                            <span>🤖 Aziz AI tavsiyasi</span>
+                            <button type="button" class="btn-link" onclick="askAiSuggestion()">Tahlil qilish</button>
+                        </div>
+                        <div id="aiSuggestionText" class="ai-hint-body">
+                            Topshiriq sarlavhasi va tavsifini kiriting, so‘ng "Tahlil qilish" tugmasini bosing.
+                        </div>
+                    </div>
+
+                    <button class="btn-primary w-100 mt-2" type="submit">Yaratish</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function askAiSuggestion() {
+    const title = document.querySelector('input[name="title"]').value;
+    const description = document.querySelector('textarea[name="description"]').value;
+    fetch("{{ url_for('ai_task_suggest') }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description })
+    })
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById("aiSuggestionText").textContent = data.suggestion;
+    })
+    .catch(() => {
+        document.getElementById("aiSuggestionText").textContent = "Xatolik yuz berdi.";
+    });
+}
+</script>
+{% endblock %}

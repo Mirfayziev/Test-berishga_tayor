@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Solar Panel · AF Imperiya{% endblock %}
+{% block header_title %}Quyosh panellari monitoringi{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Quyosh energiyasi</h3>
+        <p class="card-subtitle">Kunlik ishlab chiqarilgan energiya (kWh)</p>
+    </div>
+    <canvas id="solarChartPage" height="220"></canvas>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+window.dashboardDataUrl = "{{ url_for('api_dashboard_data') }}";
+window.renderSolarOnly = true;
+</script>
+{% endblock %}

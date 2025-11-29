@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Ijro tizimi · AF Imperiya{% endblock %}
+{% block header_title %}Ijro moduli{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Ijrodagi topshiriqlar</h3>
+        <p class="card-subtitle">Muddatga qarab rangli indikatorlar</p>
+    </div>
+    <div class="ijro-legend">
+        <span><span class="dot dot-green"></span>7 kundan ko‘p qolgan</span>
+        <span><span class="dot dot-yellow"></span>7–4 kun qolganda</span>
+        <span><span class="dot dot-orange"></span>3–1 kun qolganda</span>
+        <span><span class="dot dot-red"></span>Muddat o‘tgan</span>
+    </div>
+    <div class="ijro-list">
+        {% for t in tasks %}
+        {% set due = t.due_date %}
+        {% if due %}
+            {% set delta = (due - today).days %}
+        {% else %}
+            {% set delta = 999 %}
+        {% endif %}
+        {% if not due or delta > 7 %}
+            {% set cls = 'green' %}
+        {% elif delta >= 4 %}
+            {% set cls = 'yellow' %}
+        {% elif delta >= 1 %}
+            {% set cls = 'orange' %}
+        {% elif delta == 0 %}
+            {% set cls = 'orange' %}
+        {% else %}
+            {% set cls = 'red' %}
+        {% endif %}
+        <div class="ijro-item ijro-{{ cls }}">
+            <div class="ijro-main">
+                <div class="ijro-title">{{ t.title }}</div>
+                <div class="ijro-desc">{{ t.description }}</div>
+                <div class="ijro-meta">
+                    <span>Holat: <span class="badge status-{{ t.status }}">{{ t.status }}</span></span>
+                    <span>Ustuvorlik: <span class="badge priority-{{ t.priority }}">{{ t.priority }}</span></span>
+                    <span>Ijrochi: {{ t.assignee.full_name if t.assignee else "-" }}</span>
+                    <span>Muddat: {{ t.due_date or "-" }}</span>
+                </div>
+            </div>
+            <div class="ijro-indicator">
+                <span class="dot dot-{{ cls }}"></span>
+                {% if delta > 0 %}
+                    <div class="ijro-days">{{ delta }} kun qoldi</div>
+                {% elif delta == 0 %}
+                    <div class="ijro-days">Bugun tugaydi</div>
+                {% else %}
+                    <div class="ijro-days">{{ delta|abs }} kun oldin tugagan</div>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <p>Ijro uchun topshiriqlar mavjud emas.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

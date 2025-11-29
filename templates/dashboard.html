@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · AF Imperiya{% endblock %}
+{% block header_title %}Umumiy Dashboard{% endblock %}
+
+{% block content %}
+<div class="grid-4">
+    <div class="card stat-card">
+        <div class="stat-label">Jami topshiriqlar</div>
+        <div class="stat-value">{{ total_tasks }}</div>
+        <div class="stat-sub">Platformadagi barcha topshiriqlar</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-label">Bajarilgan</div>
+        <div class="stat-value text-success">{{ completed }}</div>
+        <div class="stat-sub">Holati "done" bo'lganlar</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-label">Jarayonda</div>
+        <div class="stat-value text-info">{{ in_progress }}</div>
+        <div class="stat-sub">Faol bajarilayotganlar</div>
+    </div>
+    <div class="card stat-card">
+        <div class="stat-label">Muddatdan o'tgan</div>
+        <div class="stat-value text-danger">{{ overdue }}</div>
+        <div class="stat-sub">Tezkor nazorat talab qiladi</div>
+    </div>
+</div>
+
+<div class="grid-2 mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h3>Topshiriqlar holati</h3>
+            <p class="card-subtitle">AI asosida avtomatik tahlil qilinadigan real vaqtli grafika</p>
+        </div>
+        <canvas id="tasksStatusChart" height="160"></canvas>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>So‘nggi topshiriqlar</h3>
+            <p class="card-subtitle">Eng so‘nggi 5 ta topshiriq</p>
+        </div>
+        <div class="table-simple">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sarlavha</th>
+                        <th>Holat</th>
+                        <th>Ustuvorlik</th>
+                        <th>Muddat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in recent_tasks %}
+                    <tr>
+                        <td>{{ t.title }}</td>
+                        <td><span class="badge status-{{ t.status }}">{{ t.status }}</span></td>
+                        <td><span class="badge priority-{{ t.priority }}">{{ t.priority }}</span></td>
+                        <td>{{ t.due_date or "-" }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">Hozircha topshiriqlar yo‘q.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="grid-2 mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h3>Quyosh paneli energiyasi</h3>
+            <p class="card-subtitle">Oxirgi 30 kun + keyingi 7 kun prognoz</p>
+        </div>
+        <canvas id="solarChart" height="180"></canvas>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>Xodimlar activity heatmap</h3>
+            <p class="card-subtitle">Kunlik bajarilgan topshiriqlar</p>
+        </div>
+        <canvas id="activityHeatmap" height="180"></canvas>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+window.dashboardDataUrl = "{{ url_for('api_dashboard_data') }}";
+</script>
+{% endblock %}

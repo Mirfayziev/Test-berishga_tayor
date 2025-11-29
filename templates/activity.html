@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Xodim activity · AF Imperiya{% endblock %}
+{% block header_title %}Xodimlar activity heatmap{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Activity heatmap</h3>
+        <p class="card-subtitle">Kunlik bajarilgan topshiriqlar soni bo‘yicha vizual tahlil</p>
+    </div>
+    <canvas id="activityHeatmapPage" height="260"></canvas>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+window.dashboardDataUrl = "{{ url_for('api_dashboard_data') }}";
+window.renderActivityOnly = true;
+</script>
+{% endblock %}

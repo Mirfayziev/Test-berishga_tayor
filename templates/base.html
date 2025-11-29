@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}AF Imperiya Demo{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Simple modern CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-circle">AI</div>
+            <div class="logo-text">
+                <span class="logo-main">AF Imperiya</span>
+                <span class="logo-sub">Task & Solar AI</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('index') }}" class="nav-item {% if request.endpoint == 'index' %}active{% endif %}">
+                <span>📊</span> <span>Dashboard</span>
+            </a>
+            <a href="{{ url_for('tasks_list') }}" class="nav-item {% if 'tasks' in request.endpoint %}active{% endif %}">
+                <span>✅</span> <span>Topshiriqlar</span>
+            </a>
+            <a href="{{ url_for('ijro_board') }}" class="nav-item {% if request.endpoint == 'ijro_board' %}active{% endif %}">
+                <span>💡</span> <span>Ijro tizimi</span>
+            </a>
+            <a href="{{ url_for('solar_page') }}" class="nav-item {% if request.endpoint == 'solar_page' %}active{% endif %}">
+                <span>☀️</span> <span>Solar panel</span>
+            </a>
+            <a href="{{ url_for('activity_page') }}" class="nav-item {% if request.endpoint == 'activity_page' %}active{% endif %}">
+                <span>🔥</span> <span>Xodim activity</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            {% if current_user.is_authenticated %}
+                <div class="user-mini">
+                    <div class="user-circle">{{ current_user.full_name[:1] }}</div>
+                    <div>
+                        <div class="user-name">{{ current_user.full_name }}</div>
+                        <div class="user-role">{{ current_user.role|capitalize }}</div>
+                    </div>
+                </div>
+                <a href="{{ url_for('logout') }}" class="logout-link">Chiqish ↩</a>
+            {% endif %}
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <div class="topbar-title">
+                {% block header_title %}Panel{% endblock %}
+            </div>
+            <div class="topbar-actions">
+                <span class="badge-pill">Demo versiya · AI500</span>
+            </div>
+        </header>
+
+        <section class="content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="flash-container">
+                  {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

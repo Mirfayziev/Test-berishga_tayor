@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="uz">
+<head>
+    <meta charset="utf-8">
+    <title>Login · AF Imperiya Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="login-body">
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-logo">
+            <div class="logo-circle">AI</div>
+            <div class="logo-text">
+                <span class="logo-main">AF Imperiya</span>
+                <span class="logo-sub">Task & Solar AI Platform</span>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="flash-container">
+              {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form method="post" class="form">
+            <label>
+                <span>Email</span>
+                <input type="email" name="email" required placeholder="admin@example.com">
+            </label>
+            <label>
+                <span>Parol</span>
+                <input type="password" name="password" required placeholder="••••••••">
+            </label>
+            <button type="submit" class="btn-primary w-100 mt-2">Kirish</button>
+
+            <div class="login-demo-hint">
+                Demo kirish ma'lumotlari:
+                <ul>
+                    <li>Admin: <code>admin@example.com / admin123</code></li>
+                    <li>Rahbar: <code>rahbar@example.com / rahbar123</code></li>
+                    <li>Xodim: <code>xodim@example.com / xodim123</code></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
