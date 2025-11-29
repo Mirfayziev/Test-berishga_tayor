@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}AI500 Pitch · AF Imperiya{% endblock %}
+{% block header_title %}AI500 — AF Imperiya Task & Solar AI{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h3>AF Imperiya · Task & Solar AI Platformasi</h3>
+    <p class="card-subtitle">
+      Tashkilotlar uchun topshiriqlar, ijro jarayoni va quyosh panellari monitoringini AI yordamida avtomatlashtiruvchi yagona platforma.
+    </p>
+  </div>
+
+  <!-- 1. Muammo → Yechim -->
+  <section class="mt-2">
+    <h4>1. Muammo → Yechim</h4>
+    <div class="grid-2 mt-2">
+      <div>
+        <h5>Muammo</h5>
+        <ul class="ai500-list">
+          <li>Topshiriqlar ko‘pincha Telegram, qo‘ng‘iroq, Excel va Word orasida tarqab ketadi.</li>
+          <li>Rahbarlar real vaqtli ko‘rsatkichlarni ko‘ra olmaydi: kim qanchalik bajarayapti, qaysi topshiriq muddatdan o‘tgan.</li>
+          <li>Ijro zanjiri (Rahbar → Xodim → Rahbar) hujjat bilan rasmiylashtirilmaydi, nazorat yetmaydi.</li>
+          <li>Quyosh panellari bo‘yicha energiya ma’lumotlari alohida joylarda, tarix va prognoz amalda yo‘q.</li>
+          <li>Analitika va AI tahlil bo‘lmagani uchun qarorlar “sezgi”ga asoslanadi.</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Yechim</h5>
+        <ul class="ai500-list">
+          <li><strong>AF Imperiya Task & Solar AI</strong> — barcha topshiriqlar, ijro, energiya monitoringi bitta platformada.</li>
+          <li>Dashboard orqali real vaqtli grafiklar: topshiriqlar holati, xodimlar activity, solar energiya.</li>
+          <li>Ijro moduli: muddat bo‘yicha rangli indikatorlar (yashil/sariq/apelsin/qizil), ijro zanjiri boshidan oxirigacha ko‘rinadi.</li>
+          <li>AI yordamchisi: topshiriq kimga mos, muddat yetadimi, solar energiya bo‘yicha 7 kunlik forecast.</li>
+          <li>Telegram bilan integratsiya: topshiriqlar va holat o‘zgarishlari bo‘yicha avtomatik bildirishlar.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Jamoa -->
+  <section class="mt-3">
+    <h4>2. Jamoa</h4>
+    <div class="grid-2 mt-2">
+      <div>
+        <h5>Jamoa tarkibi</h5>
+        <ul class="ai500-list">
+          <li><strong>Aziz Fayziev</strong> — Founder & Full-stack AI Developer</li>
+        </ul>
+        <p class="ai500-note">
+          Hozircha loyiha <strong>solo-founder</strong> formatida yuritilmoqda, lekin arxitektura keyinchalik jamoani kengaytirish uchun tayyor.
+        </p>
+      </div>
+      <div>
+        <h5>Ko‘nikmalar va texnologiyalar</h5>
+        <ul class="ai500-list">
+          <li>Backend: Python, Flask, REST API, SQLAlchemy, PostgreSQL/SQLite.</li>
+          <li>Frontend: HTML, CSS, responsive dizayn, Chart.js, interaktiv dashboardlar.</li>
+          <li>AI & avtomatlashtirish: ChatGPT / OpenAI API, prompt engineering, rule-based “AI helper”.</li>
+          <li>Integratsiyalar: Telegram bot, webhooklar, Railway / Render kabi hostinglar.</li>
+          <li>DevOps: GitHub, virtual environment, Gunicorn, Railway deploy.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Nima uchun aynan biz? -->
+  <section class="mt-3">
+    <h4>3. Nima uchun jamoamiz bu muammoni hal qila oladi?</h4>
+    <ul class="ai500-list">
+      <li>Aziz hozirgi kunda real ish jarayonlari uchun bir nechta topshiriq boshqarish va ombor / ijro platformalarini ishlab chiqib, deploy qilgan.</li>
+      <li>Projektning hozirgi demo versiyasi allaqachon ishga tushgan: Railway’da onlayn, real dashboard va modullar bilan.</li>
+      <li>Texnik stack — oddiy, tushunarli va kengaytiriladigan: Flask + SQL + Chart.js + AI API.</li>
+      <li>Jamoa (founder) bir vaqtning o‘zida ham biznes jarayonlarini tushunadi, ham kod yozadi, ham UI/UX ga e’tibor beradi.</li>
+      <li>Loyiha strukturasida boshidan “AI-first” yondashuvi o‘ylangan: har bir modulda AI yordamchi uchun joy bor.</li>
+    </ul>
+  </section>
+
+  <!-- 4. Yo'l xaritasi -->
+  <section class="mt-3">
+    <h4>4. Yo‘l xaritasi: Idea → Prototype → MVP → Launched</h4>
+    <div class="ai500-roadmap">
+      <div class="ai500-step">
+        <div class="ai500-step-title">Idea</div>
+        <div class="ai500-step-body">
+          <ul>
+            <li>Topshiriqlar va ijroni bitta tizimga yig‘ish g‘oyasi.</li>
+            <li>Solar panel monitoringini qo‘shish orqali “smart city / smart kompaniya” konsepsiyasi.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ai500-step">
+        <div class="ai500-step-title">Prototype</div>
+        <div class="ai500-step-body">
+          <ul>
+            <li>Flask asosida dastlabki demo: login, topshiriqlar CRUD, oddiy grafiklar.</li>
+            <li>Telegram bilan asosiy integratsiya, lokal SQLite bazasi.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ai500-step">
+        <div class="ai500-step-title">MVP</div>
+        <div class="ai500-step-body">
+          <ul>
+            <li>Hozirgi demo: Dashboard, Ijro tizimi, Solar panel, Xodim activity heatmap.</li>
+            <li>AI helper: topshiriq tahlili va solar forecast.</li>
+            <li>Railway’da deploy qilingan, real URL orqali ishlovchi web-app.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ai500-step">
+        <div class="ai500-step-title">Launched</div>
+        <div class="ai500-step-body">
+          <ul>
+            <li>Ko‘p tashkilotlar uchun ko‘p-tenant arxitekturaga o‘tish.</li>
+            <li>Full Telegram & email notification, mobil friendly PWA.</li>
+            <li>AI modelini yanada kuchaytirish (prioritization, anomaly detection, risk scoring).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Yechimni qanday amalga oshiramiz (bosqichlar, texnologiyalar, AI) -->
+  <section class="mt-3">
+    <h4>5. Yechimni qanday amalga oshirish rejalashtirilgan?</h4>
+    <div class="grid-2 mt-2">
+      <div>
+        <h5>Texnik arxitektura</h5>
+        <ul class="ai500-list">
+          <li>Backend: Flask + SQLAlchemy (PostgreSQL / SQLite)</li>
+          <li>Frontend: Template-based HTML + CSS + Chart.js (SPA talab qilinmaydi, lekin mumkin)</li>
+          <li>Hosting: Railway (gunicorn + container), kerak bo‘lsa Render / Docker</li>
+          <li>Integratsiya: Telegram bot (webhook), ichki REST API endpointlar</li>
+        </ul>
+      </div>
+      <div>
+        <h5>AI vositalari va qo‘llanilishi</h5>
+        <ul class="ai500-list">
+          <li>ChatGPT / OpenAI API — topshiriqlar matnini tahlil qilib, kimga berish va muddat bo‘yicha tavsiya.</li>
+          <li>Solar energiya ma’lumotlariga asoslangan oddiy forecast model (boshlang‘ich bosqich) → keyinroq ML modelga o‘tish.</li>
+          <li>Rule-based AI helper — foydalanuvchi sarlavha va tavsif kiritsa, tizim tezda tavsiya qaytaradi (hozirgi demo).</li>
+          <li>Kelajak bosqichida — xodim activity ma’lumotlari asosida “burnout” yoki resurs yetishmovchiligi bo‘yicha yordamchi signal.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Demo sahifalarga linklar -->
+  <section class="mt-3">
+    <h4>6. Demo veb-sayt bo‘limlari</h4>
+    <p class="ai500-note">
+      Quyidagi bo‘limlar hozir Railway’da ishlayotgan demo versiyada mavjud:
+    </p>
+    <ul class="ai500-links">
+      <li>📊 <strong>Dashboard</strong> — umumiy ko‘rsatkichlar va grafiklar.</li>
+      <li>✅ <strong>Topshiriqlar</strong> — yaratish, boshqarish, AI tavsiyasi.</li>
+      <li>💡 <strong>Ijro tizimi</strong> — muddat bo‘yicha rangli indikatorlar.</li>
+      <li>☀️ <strong>Solar panel</strong> — energiya statistikasi va forecast.</li>
+      <li>🔥 <strong>Xodim activity</strong> — kunlik activity graph.</li>
+    </ul>
+    <div class="mt-2">
+      <a href="{{ url_for('index') }}" class="btn-primary">Demo dashboardni ochish</a>
+    </div>
+  </section>
+
+  <!-- 7. Why now? -->
+  <section class="mt-3">
+    <h4>7. Nega aynan hozir?</h4>
+    <ul class="ai500-list">
+      <li>Kompaniyalar remote / gibrid rejimga o‘tayotgani sababli, topshiriqlarni faqat ofisdagi doska yoki Excel’da yuritish yetarli emas.</li>
+      <li>Quyosh energiyasi va energiya samaradorligi mavzusi O‘zbekistonda va mintaqada dolzarb bo‘lyapti.</li>
+      <li>AI texnologiyalari hozir yetarlicha arzon va qulay: ChatGPT / OpenAI API orqali kichik jamoa ham katta tizimlar darajasidagi funksiyalarni amalga oshira oladi.</li>
+      <li>Bozorda ko‘plab umumiy task managerlar bor, lekin “ijro jarayoni + solar monitoring + AI” kombinatsiyasi bilan lokal real ehtiyojni yopadigan yechim kam.</li>
+    </ul>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_js %}{% endblock %}
